@@ -5,10 +5,14 @@ import Footer from "@/app/components/footer";
 const CaseStudyPage = async ({ params }: { params: { slug: string } }) => {
   const { slug } = params;
 
+   console.log("URL se slug:", slug);
+
   const client = await clientPromise;
   const db = client.db("cloud-consulting");
 
   const study = await db.collection("caseStudies").findOne({ slug });
+
+   console.log("Study mila:", study);
 
   if (!study) {
     return <div>Case study not found</div>;
