@@ -1,5 +1,5 @@
 // import { client } from "@/sanity/lib/client";
-import client from "@/lib/mongodb";
+import clientPromise from "@/lib/mongodb";
 import { urlFor } from "@/sanity/lib/image";
 import { partnersQuery } from "@/sanity/lib/queries";
 
@@ -88,7 +88,8 @@ const GoogleCloudLogo = () => (<svg xmlns="http://www.w3.org/2000/svg" width="78
 const partnerLogos = [AwsLogo, AzureLogo, GoogleCloudLogo];
 
 const Partners = async () => {
-  const db = client.db("cloud-consulting");
+  const client = await clientPromise;
+const db = client.db("cloud-consulting");
 
 const partners = await db
   .collection("partners")
