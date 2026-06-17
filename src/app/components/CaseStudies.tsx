@@ -2,8 +2,10 @@ import clientPromise from "@/lib/mongodb";
 import Navbar from "@/app/components/navbar";
 import Footer from "@/app/components/footer";
 
-const CaseStudyPage = async ({ params }: { params: { slug: string } }) => {
-  const { slug } = params;
+const CaseStudyPage = async (
+  { params }: { params: Promise<{ slug: string }> }
+) => {
+  const { slug } = await params;
 
   const client = await clientPromise;
   const db = client.db("cloud-consulting");
@@ -54,7 +56,7 @@ const CaseStudyPage = async ({ params }: { params: { slug: string } }) => {
           </div>
 
           <img
-            src={study.image}
+            src={study.image  || "/banner.jfif"}
             alt={study.heading}
             className="h-[250px] lg:h-[400px] object-cover rounded-[20px] mb-8 md:w-[40%]"
           />
@@ -62,7 +64,11 @@ const CaseStudyPage = async ({ params }: { params: { slug: string } }) => {
         </div>
 
         <div className="prose max-w-none whitespace-pre-line px-5 md:px-10">
-          {study.body}
+          <div className="whitespace-pre-line px-5 md:px-10">
+  {typeof study.body === "string"
+    ? study.body
+    : JSON.stringify(study.body)}
+</div>
         </div>
 
       </article>
