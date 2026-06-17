@@ -1,5 +1,6 @@
 // import { client } from "@/sanity/lib/client";
 import client from "@/lib/mongodb";
+import clientPromise from "@/lib/mongodb";
 import { urlFor } from "@/sanity/lib/image";
 import { caseStudyBySlugQuery } from "@/sanity/lib/queries";
 
@@ -13,6 +14,7 @@ const CaseStudyPage = async (
 
   console.log("SLUG:", slug);
 
+  await client.connect();
   const db = client.db("cloud-consulting");
 
 const study = await db

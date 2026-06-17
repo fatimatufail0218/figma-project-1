@@ -1,10 +1,11 @@
 // import { client } from "@/sanity/lib/client";
-import client from "@/lib/mongodb";
+import clientPromise from "@/lib/mongodb";
 import { urlFor } from "@/sanity/lib/image";
 import { servicesQuery } from "@/sanity/lib/queries";
 import Card from "./ui/card";
 
 const Service = async () => {
+  const client = await clientPromise;
   const db = client.db("cloud-consulting");
 
 const services = await db
