@@ -28,21 +28,50 @@ const CaseStudyPage = async ({ params }: { params: { slug: string } }) => {
     <>
       <Navbar />
 
-      <article>
-        <h1 className="font-bold text-[45px] text-center p-10 font-archivo tracking-tight m-auto">
-          {study.heading}
-        </h1>
-        <div className="flex w-[90%] m-auto gap-5 ">
-          <div className="w-[60%] text-left">
-            <p className="font-semibold text-gray-600">{study.description}</p>
-            <br />
-            <p className="whitespace-pre-line leading-none">{study.body}</p>
-          </div>
-          <div className="w-[40%]">
-            <img src="/s7-img1.jpg" alt="" />
+      <article className="w-[100%] md:max-w-[90%] mx-auto px-4 md:px-6 py-12 md:py-20">
+
+        <div className="relative w-full h-[250px] md:h-[400px] rounded-[20px] mb-8 overflow-hidden">
+          <img src="/banner.jfif" className="w-full h-full object-cover" />
+          <div className="absolute inset-0 flex items-center justify-center bg-black/40">
+            <h1 className="text-[#ffd7ea] text-2xl md:text-[60px] lg:text-[100px] font-bold">
+              Make Cloud
+            </h1>
           </div>
         </div>
-        
+
+        <div className="flex flex-col md:flex-row items-center p-10 gap-5">
+          <div className="w-full md:w-[60%]">
+            <div className="flex items-center gap-2 mb-4">
+              <img src="/calender.svg" className="w-[14px] h-[14px] lg:w-[20px] lg:h-[20px]" />
+              <span className="text-[#E53023] text-[15px] font-medium">{formattedDate}</span>
+            </div>
+
+            <h1 className="font-archivo text-[28px] lg:text-[35px] xl:text-[45px] uppercase leading-tight mb-6">
+              {study.heading}
+            </h1>
+
+            {study.description && (
+              <p className="font-roboto text-[16px] lg:text-[20px] xl:text-[22px] text-gray-600 mb-8 leading-relaxed">
+                {study.description}
+              </p>
+            )}
+          </div>
+
+          <img
+            src={study.image || "/banner.jfif"}
+            alt={study.heading}
+            className="h-[250px] lg:h-[400px] object-cover rounded-[20px] mb-8 md:w-[40%]"
+          />
+        </div>
+
+        <h2 className="font-roboto text-[30px] xl:text-[40px] font-bold px-5 md:px-10 pb-5">
+          What we Offer...
+        </h2>
+
+        <div className="prose prose-lg max-w-none font-roboto text-[17px] md:text-[20px] px-5 md:px-10 whitespace-pre-line">
+          {typeof study.body === "string" ? study.body : JSON.stringify(study.body)}
+        </div>
+
       </article>
 
       <Footer />
